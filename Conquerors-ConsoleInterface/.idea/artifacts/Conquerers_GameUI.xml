@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Conquerers_GameUI">
+    <output-path>$PROJECT_DIR$/out/artifacts/Conquerers_GameUI</output-path>
+    <root id="archive" name="Conquerers_GameUI.jar">
+      <element id="module-output" name="GameUI" />
+    </root>
+  </artifact>
+</component>

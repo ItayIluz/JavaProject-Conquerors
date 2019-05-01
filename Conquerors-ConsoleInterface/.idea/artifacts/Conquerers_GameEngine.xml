@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Conquerers_GameEngine">
+    <output-path>$PROJECT_DIR$/out/artifacts/Conquerers_GameEngine</output-path>
+    <root id="archive" name="Conquerers_GameEngine.jar">
+      <element id="module-output" name="GameEngine" />
+    </root>
+  </artifact>
+</component>
