@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0">
+         <left>
+            <TabPane minWidth="300.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Players">
+                  <content>
+                        <ScrollPane fitToHeight="true">
+                           <content>
+                              <TableView fx:id="playerTable">
+                                <columns>
+                                  <TableColumn fx:id="playerNameColumn" prefWidth="75.0" text="Name" />
+                                  <TableColumn fx:id="playerIdColumn" prefWidth="63.0" text="ID" />
+                                    <TableColumn fx:id="playerColorColumn" prefWidth="87.0" text="Color" />
+                                    <TableColumn fx:id="playerMoneyColumn" prefWidth="73.0" text="Money" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                  </content>
+                </Tab>
+                <Tab text="Units">
+                  <content>
+                        <ScrollPane fitToHeight="true">
+                           <content>
+                              <TableView fx:id="unitsTable">
+                                 <columns>
+                                    <TableColumn fx:id="unitTypeColumn" prefWidth="71.0" text="Type" />
+                                    <TableColumn fx:id="unitRankColumn" prefWidth="55.0" text="Rank" />
+                                    <TableColumn fx:id="unitCostColumn" prefWidth="44.0" text="Cost" />
+                                    <TableColumn fx:id="unitMaxFirepowerColumn" prefWidth="114.0" text="Max Firepower" />
+                                    <TableColumn fx:id="unitCompetenceReductionColumn" minWidth="20.0" prefWidth="178.0" text="Competence Reduction" />
+                                    <TableColumn fx:id="unitSingleFirepowerCostColumn" minWidth="20.0" prefWidth="164.0" text="Single Firepower Cost" />
+                                    <TableColumn fx:id="unitTotalUnitsOnBoardColumn" minWidth="143.0" prefWidth="155.0" text="Total Units On Board" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </left>
+         <center>
+            <ScrollPane fitToHeight="true" fitToWidth="true">
+               <content>
+                  <AnchorPane fx:id="boardAnchorPane" prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" spacing="25.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="takeActionButton" disable="true" mnemonicParsing="false" onAction="#handleTakeAction" text="Take Action On Territory" />
+                <Button fx:id="endTurnButton" disable="true" mnemonicParsing="false" onAction="#handleEndTurn" text="End Turn" />
+                  <Button fx:id="surrenderButton" disable="true" mnemonicParsing="false" onAction="#handleSurrender" text="Surrender" />
+                  <Button fx:id="forceEndGameButton" disable="true" mnemonicParsing="false" onAction="#handleForceEndGame" text="Force End Game" />
+                  <Label fx:id="replayModeLabel" text="Replay Mode:" visible="false">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="replayModePreviousButton" mnemonicParsing="false" onAction="#handleReplayPrevious" text="Previous" visible="false" />
+                  <Button fx:id="replayModeNextButton" mnemonicParsing="false" onAction="#handleReplayNext" text="Next" visible="false" />
+               </children>
+               <padding>
+                  <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+               </padding>
+            </HBox>
+         </bottom>
+         <top>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" spacing="25.0">
+                     <children>
+                        <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#handleStartGame" text="Start Game" />
+                        <Button fx:id="saveGameButton" disable="true" mnemonicParsing="false" onAction="#handleSaveGame" text="Save Game" />
+                        <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#handleBackToMenu" text="Back To Main Menu" />
+                        <CheckBox fx:id="showAnimationsCheckbox" mnemonicParsing="false" selected="true" text="Show Animations" />
+                        <Label text="Change Theme:" />
+                        <ComboBox fx:id="changeThemeComboBox">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Default" />
+                                    <String fx:value="Theme 1" />
+                                    <String fx:value="Theme 2" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </HBox>
+                  <Separator prefWidth="200.0" />
+                  <HBox alignment="CENTER" spacing="25.0">
+                     <children>
+                        <Label fx:id="currentRoundText" text="Current Round:" visible="false">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="currentRoundLabel" visible="false">
+                           <HBox.margin>
+                              <Insets left="-15.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="currentPlayerText" text="Current Player:" visible="false">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="currentPlayerLabel" visible="false">
+                           <HBox.margin>
+                              <Insets left="-15.0" />
+                           </HBox.margin></Label>
+                        <Button fx:id="startNextRoundButton" disable="true" mnemonicParsing="false" onAction="#handleNextRound" text="Start Next Round" />
+                        <Button fx:id="undoLastRoundButton" disable="true" mnemonicParsing="false" onAction="#handleUndoLastRound" text="Undo Last Round" />
+                     </children>
+                     <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </top>
+      </BorderPane>
+   </content>
+</ScrollPane>
