@@ -1,0 +1,39 @@
+.conquerors-container {
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.conquerors-container .table-container {
+    margin: 0px 15px 0px 5px;
+    width: 26%;
+}
+
+.my-table{
+    width: 100%;
+}
+
+.game-details {
+    border: 0;
+    border-bottom: 3px solid #bebebe;
+    border-style: groove;
+    padding-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.game-details span{
+    margin-right: 50px;
+    font-weight: normal;
+}
+
+.game-controls{
+    border: 0;
+    border-bottom: 3px solid #bebebe;
+    border-style: groove;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

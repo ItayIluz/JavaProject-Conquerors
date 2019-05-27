@@ -1,0 +1,33 @@
+.game-board-territory {
+    padding: 10px;
+    text-align: left;
+    border: 3px solid #bebebe;
+    border-style: groove;
+    background-color: white;
+    color: black;
+    font-weight: normal;
+    min-width: 100px;
+    font-size: 14px;
+}
+
+.game-board-territory div{
+    margin: 5px 0px;
+}
+
+.game-board-territory div:first-child{
+    margin-top: 0px;
+}
+
+.game-board-territory div:last-child{
+    margin-bottom: 0px;
+}
+
+.territory-button {
+    margin: 0;
+    margin-top: 5px;
+    padding: 7px 10px;
+}
+
+.action-buttons {
+    text-align: center;
+}

@@ -1,0 +1,8 @@
+.tables-container{
+    display: flex;
+    justify-content: center;
+}
+
+.buttons-container {
+    margin-top: 10px;
+}

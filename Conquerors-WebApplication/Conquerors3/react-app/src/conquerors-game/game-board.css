@@ -1,0 +1,7 @@
+.game-board {
+    display: grid;
+    grid-template-rows: auto;
+    width: 72%;
+    max-height: calc(80vh - 85px);
+    overflow: scroll;
+}
