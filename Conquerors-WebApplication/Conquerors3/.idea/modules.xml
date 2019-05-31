@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/GameEngine/GameEngine.iml" filepath="$PROJECT_DIR$/GameEngine/GameEngine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GameServlets/GameServlets.iml" filepath="$PROJECT_DIR$/GameServlets/GameServlets.iml" />
-    </modules>
-  </component>
-</project>

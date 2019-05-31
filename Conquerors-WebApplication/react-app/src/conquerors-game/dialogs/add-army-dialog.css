@@ -1,0 +1,11 @@
+.add-army-dialog-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    font-weight: normal;
+    width: 450px;
+}
+
+.add-army-dialog-container .dialog-detail{
+    font-weight: bold;
+}

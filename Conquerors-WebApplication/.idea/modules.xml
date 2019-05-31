@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Conquerors3.iml" filepath="$PROJECT_DIR$/Conquerors3.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameEngine/GameEngine.iml" filepath="$PROJECT_DIR$/GameEngine/GameEngine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GameUI/GameUI.iml" filepath="$PROJECT_DIR$/GameUI/GameUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameServlets/GameServlets.iml" filepath="$PROJECT_DIR$/GameServlets/GameServlets.iml" />
     </modules>
   </component>
 </project>

@@ -11,84 +11,49 @@ import java.util.*;
 
 public class Player implements Serializable {
 
-    private transient IntegerProperty id;
-    private transient StringProperty name;
-    private transient IntegerProperty money;
-    private transient Color color;
-    private transient StringProperty colorName;
+    private int id;
+    private String name;
+    private int money;
+    private String color;
+    private String colorName;
     private boolean surrendered = false;
-    private HashSet<Territory> ownedTerritories = new HashSet<>();
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-
-        out.defaultWriteObject();
-
-        out.writeObject(id.get());
-        out.writeObject(name.get());
-        out.writeObject(money.get());
-        out.writeDouble(color.getRed());
-        out.writeDouble(color.getGreen());
-        out.writeDouble(color.getBlue());
-        out.writeDouble(color.getOpacity());
-        out.writeObject(colorName.get());
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-
-        in.defaultReadObject();
-
-        id = new SimpleIntegerProperty((int) in.readObject());
-        name = new SimpleStringProperty((String) in.readObject());
-        money = new SimpleIntegerProperty((int) in.readObject());
-        double red = in.readDouble();
-        double green = in.readDouble();
-        double blue = in.readDouble();
-        double opacity = in.readDouble();
-        color = Color.color(red, green, blue, opacity);
-        colorName = new SimpleStringProperty((String) in.readObject());
-    }
+    private transient HashSet<Territory> ownedTerritories = new HashSet<>();
 
     public Player(int id, String name){
-        this.id = new SimpleIntegerProperty(id);
-        this.name = new SimpleStringProperty(name);
-        this.money = new SimpleIntegerProperty(0);
+        this.id = id;
+        this.name = name;
+        this.money = 0;
     }
 
-    public Player(int id, String name, int money, Color color, String colorName){
-        this.id = new SimpleIntegerProperty(id);
-        this.name = new SimpleStringProperty(name);
-        this.money = new SimpleIntegerProperty(money);
+    public Player(int id, String name, int money, String color, String colorName){
+        this.id = id;
+        this.name = name;
+        this.money = money;
         this.color = color;
-        this.colorName = new SimpleStringProperty(colorName);
+        this.colorName = colorName;
     }
 
     public int getId() {
-        return id.get();
+        return id;
     }
-
-    public IntegerProperty getIdProperty() { return id; }
 
     public void setMoney(int money) {
-        this.money = new SimpleIntegerProperty(money);
+        this.money = money;
     }
 
-    public String getName() { return name.get(); }
-
-    public StringProperty getNameProperty() { return name; }
+    public String getName() { return name; }
 
     public String getNameAndId() {
-        return name.get() + " (" + id.get() + ")";
+        return name + " (" + id + ")";
     }
 
     public int getMoney() {
-        return money.get();
+        return money;
     }
 
-    public IntegerProperty getMoneyProperty(){ return money; }
+    public void subtractMoney(int moneyToSubtract) { money -= moneyToSubtract;}
 
-    public void subtractMoney(int moneyToSubtract) { money.set(money.get() - moneyToSubtract);}
-
-    public void addMoney(int moneyToAdd) { money.set(money.get() + moneyToAdd);}
+    public void addMoney(int moneyToAdd) { money += moneyToAdd;}
 
     public HashSet<Territory> getOwnedTerritories() {
         return ownedTerritories;
@@ -107,14 +72,14 @@ public class Player implements Serializable {
     }
 
     public boolean hasEnoughMoney(int moneyToCompare){
-        return money.get() >= moneyToCompare;
+        return money >= moneyToCompare;
     }
 
     public ArrayList<Territory> gainProfitsAndUpdateArmyCompetence(){
         int competenceAfterReduction;
         ArrayList<Territory> toRemove = new ArrayList<>();
 
-        money.set(money.get() + getTerritoriesTotalProfit());
+        money += getTerritoriesTotalProfit();
 
         for(Territory currentTerritory : ownedTerritories){
 
@@ -130,11 +95,11 @@ public class Player implements Serializable {
         return toRemove;
     }
 
-    public static Player[] reconstructPlayers(Player[] players, int initialFunds){
-        Player[] playersToReconstruct = new Player[players.length];
+    public static ArrayList<Player> reconstructPlayers(ArrayList<Player> players, int initialFunds){
+        ArrayList<Player> playersToReconstruct = new ArrayList<>(players.size());
 
-        for(int i = 0; i < players.length; i++)
-            playersToReconstruct[i] = new Player(players[i].id.get(), players[i].name.get(), initialFunds, players[i].color, players[i].colorName.get());
+        for(int i = 0; i < players.size(); i++)
+            playersToReconstruct.add(i, new Player(players.get(i).id, players.get(i).name, initialFunds, players.get(i).color, players.get(i).colorName));
 
         return playersToReconstruct;
     }
@@ -147,16 +112,14 @@ public class Player implements Serializable {
         return totalProfits;
     }
 
-    public void setColor(Color color, String colorName){
+    public void setColor(String color, String colorName){
         this.color = color;
-        this.colorName = new SimpleStringProperty(colorName);
+        this.colorName = colorName;
     }
 
-    public Color getColor() { return color; }
+    public String getColor() { return color; }
 
-    public String getColorName() { return colorName.get(); }
-
-    public StringProperty getColorNameProperty() { return colorName; }
+    public String getColorName() { return colorName; }
 
     public boolean isSurrendered() {
         return surrendered;

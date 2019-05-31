@@ -1,29 +1,23 @@
 package engine;
 
-import javafx.beans.property.*;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Unit implements Serializable {
 
-    private transient StringProperty type;
-    private transient IntegerProperty rank;
-    private transient IntegerProperty purchasePrice;
-    private transient IntegerProperty maxFirePower;
-    private transient IntegerProperty competenceReduction;
-    private transient FloatProperty singleFirePowerPrice;
-    private transient IntegerProperty totalOnBoard = new SimpleIntegerProperty(0);
+    private String type;
+    private int rank;
+    private int purchasePrice;
+    private int maxFirePower;
+    private int competenceReduction;
+    private float singleFirePowerPrice;
 
     public Unit(String type, int rank, int purchasePrice, int maxFirePower, int competenceReduction){
-        this.type = new SimpleStringProperty(type);
-        this.rank = new SimpleIntegerProperty(rank);
-        this.purchasePrice = new SimpleIntegerProperty(purchasePrice);
-        this.maxFirePower = new SimpleIntegerProperty(maxFirePower);
-        this.competenceReduction = new SimpleIntegerProperty(competenceReduction);
-        this.singleFirePowerPrice = new SimpleFloatProperty((float) purchasePrice / (float) maxFirePower);
+        this.type = type;
+        this.rank = rank;
+        this.purchasePrice = purchasePrice;
+        this.maxFirePower = maxFirePower;
+        this.competenceReduction = competenceReduction;
+        this.singleFirePowerPrice = (float) purchasePrice / (float) maxFirePower;
     }
 
     public Unit(Unit copyUnit){
@@ -32,76 +26,28 @@ public class Unit implements Serializable {
         this.purchasePrice = copyUnit.purchasePrice;
         this.maxFirePower = copyUnit.maxFirePower;
         this.competenceReduction = copyUnit.competenceReduction;
-        this.singleFirePowerPrice = new SimpleFloatProperty((float) copyUnit.purchasePrice.get() / (float) copyUnit.maxFirePower.get());
+        this.singleFirePowerPrice = (float) copyUnit.purchasePrice / (float) copyUnit.maxFirePower;
     }
 
     public String getType(){
-        return type.get();
+        return type;
     }
 
-    public StringProperty getTypeProperty(){ return type; }
-
-    public int getRank() { return rank.get(); }
-
-    public IntegerProperty getRankProperty(){ return rank; }
+    public int getRank() { return rank; }
 
     public int getPurchasePrice() {
-        return purchasePrice.get();
+        return purchasePrice;
     }
-
-    public IntegerProperty getPurchasePriceProperty(){ return purchasePrice; }
 
     public int getMaxFirePower() {
-        return maxFirePower.get();
+        return maxFirePower;
     }
-
-    public IntegerProperty getMaxFirePowerProperty(){ return maxFirePower; }
 
     public int getCompetenceReduction() {
-        return competenceReduction.get();
+        return competenceReduction;
     }
-
-    public IntegerProperty getCompetenceReductionProperty(){ return competenceReduction; }
 
     public float getSingleFirePowerPrice(){
-        return singleFirePowerPrice.get();
-    }
-
-    public FloatProperty getSingleFirePowerPriceProperty(){ return singleFirePowerPrice; }
-
-    public void setTotalOnBoard(int toSet) { totalOnBoard.set(toSet); }
-
-    public int getTotalOnBoard() {
-        return totalOnBoard.get();
-    }
-
-    public IntegerProperty getTotalOnBoardProperty() { return totalOnBoard; }
-
-    public void addToTotalOnBoard(int toAdd){ totalOnBoard.set(totalOnBoard.get() + toAdd);}
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-
-        out.defaultWriteObject();
-
-        out.writeObject(type.get());
-        out.writeObject(rank.get());
-        out.writeObject(purchasePrice.get());
-        out.writeObject(maxFirePower.get());
-        out.writeObject(competenceReduction.get());
-        out.writeObject(singleFirePowerPrice.get());
-        out.writeObject(totalOnBoard.get());
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-
-        in.defaultReadObject();
-
-        type = new SimpleStringProperty((String) in.readObject());
-        rank = new SimpleIntegerProperty((int) in.readObject());
-        purchasePrice = new SimpleIntegerProperty((int) in.readObject());
-        maxFirePower = new SimpleIntegerProperty((int) in.readObject());
-        competenceReduction = new SimpleIntegerProperty((int) in.readObject());
-        singleFirePowerPrice = new SimpleFloatProperty((float) in.readObject());
-        totalOnBoard = new SimpleIntegerProperty((int) in.readObject());
+        return singleFirePowerPrice;
     }
 }

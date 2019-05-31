@@ -15,8 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Territory implements Serializable {
 
-    private transient IntegerProperty id;
-    private transient StringProperty conquerorTextProperty = new SimpleStringProperty("Netural");
+    private int id;
     private int profit;
     private int armyThreshold;
     private boolean isConquered = false;
@@ -24,16 +23,12 @@ public class Territory implements Serializable {
     private ArrayList<Army> armies = new ArrayList<>();
 
     public Territory(int id, int profit, int armyThreshold){
-        this.id = new SimpleIntegerProperty(id);
+        this.id = id;
         this.profit = profit;
         this.armyThreshold = armyThreshold;
     }
 
     public int getId() {
-        return id.get();
-    }
-
-    public IntegerProperty getIdProperty() {
         return id;
     }
 
@@ -65,7 +60,6 @@ public class Territory implements Serializable {
         this.conqueringPlayer = conqueringPlayer;
         this.conqueringPlayer.addTerritory(this);
         this.armies = armies;
-        conquerorTextProperty.setValue("Conqueror: " + conqueringPlayer.getName());
     }
 
     public void setNeutral(){
@@ -73,15 +67,7 @@ public class Territory implements Serializable {
         conqueringPlayer.removeTerritory(this);
         conqueringPlayer = null;
 
-        for(Army army : armies)
-            army.getUnit().addToTotalOnBoard(-1 * army.getAmount());
-
         armies.clear();
-        conquerorTextProperty.setValue("Neutral");
-    }
-
-    public StringProperty getConquerorTextProperty(){
-        return conquerorTextProperty;
     }
 
     public ArrayList<Army> getArmies() {
@@ -229,8 +215,6 @@ public class Territory implements Serializable {
 
                 if (totalRemainingFirepower >= armyThreshold) { // If army is enough conquer the territory
                     setConqueredByPlayer(winningPlayer, winningArmy);
-                    for (Army army : armies)
-                        army.getUnit().addToTotalOnBoard(army.getAmount());
                 } else { // If army is not enough return money
 
                     for (Army army : winningArmy)
@@ -250,21 +234,5 @@ public class Territory implements Serializable {
             setNeutral();
             return winningArmy;
         }
-    }
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-
-        out.defaultWriteObject();
-
-        out.writeObject(id.get());
-        out.writeObject(conquerorTextProperty.get());
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-
-        in.defaultReadObject();
-
-        id = new SimpleIntegerProperty((int) in.readObject());
-        conquerorTextProperty = new SimpleStringProperty((String) in.readObject());
     }
 }
